@@ -4,7 +4,8 @@ I'm always writing an essay or hacking on some bizarre side project, and every n
 
 Here's what I hope to write about:
 * Finding alpha in sports betting on mixed martial arts fights
-* Messing around with GPT-3, cherry-picking juicy results
-* Explanations worth caching
+* Messing around with GPT-3, cherry-picking remarkable results
+* Explanations I've written for compex topics, which are worth caching
+* Analysis of weird datasets I've gathered
 * Surprisingly interesting Wikipedia articles
 * Unreasonably useful words
