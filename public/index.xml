@@ -2,17 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>curcio&#39;s curios</title>
-    <link>http://example.org/</link>
+    <link>http://john-curcio.github.io/</link>
     <description>Recent content on curcio&#39;s curios</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 24 Nov 2022 20:09:36 -0500</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Nov 2022 20:09:36 -0500</lastBuildDate><atom:link href="http://john-curcio.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Contact</title>
+      <link>http://john-curcio.github.io/contact/</link>
+      <pubDate>Thu, 24 Nov 2022 22:41:52 -0500</pubDate>
+      
+      <guid>http://john-curcio.github.io/contact/</guid>
+      <description>Idk I&amp;rsquo;ll think of something professional to do with this later.</description>
+    </item>
+    
     <item>
       <title>Inaugural post</title>
-      <link>http://example.org/inaugural-post/</link>
+      <link>http://john-curcio.github.io/inaugural-post/</link>
       <pubDate>Thu, 24 Nov 2022 20:09:36 -0500</pubDate>
       
-      <guid>http://example.org/inaugural-post/</guid>
+      <guid>http://john-curcio.github.io/inaugural-post/</guid>
       <description>Hello, world! It&amp;rsquo;s me, blog!</description>
     </item>
     
