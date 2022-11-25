@@ -9,5 +9,3 @@ Here's what I hope to write about:
 * Analysis of weird datasets I've gathered
 * Surprisingly interesting Wikipedia articles
 * Unreasonably useful words
-
-# Okay, here's another quick test
