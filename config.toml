@@ -1,0 +1,11 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = "curcio's curios"
+theme = 'hugo-bearblog'
+
+# Generate a nice robots.txt for SEO
+enableRobotsTXT = true
+
+[permalinks]
+  blog = "/:slug/"
+  tags = "/blog/:slug"
