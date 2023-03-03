@@ -1,7 +1,7 @@
 +++
 title = "Deliberately curating an idiosyncratic vocabulary"
 date = "2023-02-24T19:09:43-05:00"
-
+draft = true
 #
 # description is optional
 #
@@ -9,14 +9,9 @@ date = "2023-02-24T19:09:43-05:00"
 tags = []
 +++
 
-The arrival of LLMs has made it painfully clear that certain kinds of complex cognition are surprisingly straightforward to replicate. 
-* I fall for trick questions
-* I have an embarrassingly limited working memory
-* I write bad code that needs to be debugged
+The arrival of LLMs has made it painfully clear that certain kinds of complex cognition are surprisingly straightforward to replicate. As more cognition can be outsourced, what novel thoughts will be left for me? How do I have an idea that nobody else can have?
 
-As more cognition can be outsourced, what novel thoughts does that leave for me? How do I have an idea that nobody else can have?
-
-**I want to develop an eccentric, powerful vocabulary**. If you're a smart, curious, ambitious person, you should do the same.
+**I want to develop an eccentric, powerful vocabulary**. If you're a smart, curious, ambitious person, or if you just don't want to be left behind, you should do the same. By doing so, you can express ordinary things in novel ways, and discover new and exciting regions of thought-space.
 
 # Some words that I get a ton of mileage out of
 
@@ -29,17 +24,15 @@ As more cognition can be outsourced, what novel thoughts does that leave for me?
 * "convexity"
 * "option"
 
-This is the vocabulary of a CMU graduate who spends a great deal of time reading Wikipedia. 
+This is the vocabulary of a CMU graduate who spends a great deal of time reading Wikipedia. I wouldn't have it any other way.
 
 # The base English module is surprisingly unwieldy
 
-The fact that domain-specific language exists shouldn't surprise anyone. But really, English is *really bad*.
-
-Have you ever tried to describe a set of physical instructions to someone, and utterly failed to get your point across? I've experienced this as the instructor, the student, and an innocent bystander, in the contexts of proper bench press form, Brazilian jiujitsu, and assembling furniture. I don't think this is because any parties involved were exceptionally dumb - it's the English language's fault.
+Have you ever tried to describe a set of physical instructions to someone, and utterly failed to get your point across? I've experienced this as the instructor, the student, and an innocent bystander, in the contexts of proper bench press form, Brazilian jiujitsu, and assembling furniture. Nobody involved was exceptionally dumb - I think it's the English language's fault.
 
 When two people view an object from different angles, there is the potential for ambiguity when a person says "up", "left", or "forward". So people invented words for absolute coordinate systems, like "starboard", "yaw", "proper left", and cardinal directions.
 
-**Idioms represent patterns that English speakers as a society have selected to be frequent and important enough to be worth collectively memorizing, despite being difficult to articulate in standard English.** The idea is mapped onto the context domain by analogy. A hundred years from now, our most popular idioms may be streamlined down to words. The words we know and love were probably once idioms, and clumsy analogies before that.
+Consider idioms. Idioms are like the pupae of words. As a society, we've found them to be useful analogies for common patterns in the world, which are otherwise difficult to articulate in standard English (if they were easy to articulate, we wouldn't need the idiom). A hundred years from now, our most popular idioms may be streamlined down to words. The words we know and love were probably once idioms, and long-winded stories before that.
 
 # The pitch
 
@@ -63,7 +56,7 @@ When you hear people say "I guess I never thought about it that way", it's worki
 
 # Precedent
 
-This is an extremely common pattern among smart, curious, productive people. It also makes you fun to talk to.
+This is an extremely common pattern among smart, curious, interesting, productive people.
 
 * [Paul Erdös](https://matt-rickard.com/erdos-vocab), a mathematician known for his sheer productivity
 * [Paul Graham](http://www.paulgraham.com/gh.html#:~:text=Several%20friends%20mentioned,shrinks%20the%20court.)
