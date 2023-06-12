@@ -13,5 +13,3 @@ I'm always writing an essay or hacking on some bizarre side project, and every n
 * Analysis of weird datasets I've gathered
 * Surprisingly interesting Wikipedia articles
 * Unreasonably useful words -->
-
-$$Hey, does this do anything?$$
