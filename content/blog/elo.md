@@ -36,11 +36,13 @@ If A and B go to a draw, this is the update rule:
 
 So $A$ and $B$ are pulled towards one another.
 
-[New players are typically given an Elo of 1000 to start](https://chessklub.com/what-is-a-chess-rating/#:~:text=A%20standard%20FIDE%20chess%20rating,considerably%20experienced%20and%20great%20players.).
+[Chess.com gives new players an elo of 400 to start](https://support.chess.com/article/671-how-do-i-create-an-accoun#:~:text=Choose%20your%20skill,Advanced%3A%201600).
 
-# Intuition
+# Statistical Intuition
 
-The first time I saw this, I thought it was gobbledygook.
+The first time I saw this, I thought it was gobbledygook. Then I saw this graph:
+
+![png](/opp_elo_score.png)
 
 Turns out, with some algebraic manipulations, one can show that the following is an equivalent system:
 
@@ -57,12 +59,14 @@ $ \beta' = \beta + \alpha (Y - P(A\ beats\ B))$
 
 Ignoring draws, this is the gradient of the binary cross-entropy loss, with $\alpha$ for the learning rate.
 
-**So the Elo rating system is stochastic gradient descent on a really, really wide logistic regression model, with a batch size of 1**.
+**So the Elo rating system is stochastic gradient descent on a really, really wide logistic regression model, with a batch size of 1**. The K-factor is a scaled learning rate.
 
-# Misc Thoughts
+# Is this really more intuitive?
 
 It's easy to criticise the Elo rating system. For instance, suppose you compete in a tournament, and you lose your first match against a similarly-ranked opponent. For your own ego's sake, you should hope that guy does well in the rest of the tournament - if he also beats everyone else, you can tell yourself that his original elo was an underestimate.
 
-I believe the function of Elo scores in chess culture is similar to that of the Greeks in finance. Nobody takes the Black-Scholes model as gospel; it's useful as a shorthand and social convention. **Anything more sophisticated would be a worse coordinating mechanism.** If you want a system to be adopted and employed by a large number of people amongst each other, it has to be as simple to use as possible. Had the logistic regression model not been burned into my brain, I would find it far less intuitive than the original formulation.
+I believe the function of Elo scores in chess culture is similar to that of Black-Scholes in finance. Nobody takes the model as gospel; it's useful as a shorthand and social convention. Traders can compute its Greeks in their heads and can expect other traders to understand it as well. The model was so useful that its adoption led to a boom in options trading. **Anything more sophisticated would be a worse coordinating mechanism.** 
+
+If you want a large number of people to adopt a system, and to mutually employ its inferences to interact with each other, it must be as simple as possible. Had the logistic regression model not been burned into my brain, I would find it far less intuitive than the original Elo formulation, and at any rate impossible to calculate.
 
 It adds a new dimension to my understanding of the otherwise almost trite saying: all models are wrong, some are useful.
