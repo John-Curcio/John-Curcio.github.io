@@ -40,7 +40,7 @@ So $A$ and $B$ are pulled towards one another.
 
 # Statistical Intuition
 
-The first time I saw this, I thought it was gobbledygook. Then I saw this graph:
+The first time I saw this, I thought it was gobbledygook. Then I made this graph:
 
 ![png](/opp_elo_score.png)
 
@@ -65,7 +65,7 @@ Ignoring draws, this is the gradient of the binary cross-entropy loss, with $\al
 
 Criticisms of the Elo rating system cost a dime a dozen. For instance, suppose you compete in a tournament, and you lose your first match against a similarly-ranked opponent. For your own ego's sake, you should hope that guy does well in the rest of the tournament - if he also beats everyone else, you can believe that his original elo was an underestimate.
 
-I believe Elo scores in chess culture play a role similar to that of Black-Scholes in finance. Nobody treats the model as gospel anymore, yet it laid the foundation for options trading as a large, legitimate industry with buyers and sellers. Its primary utility is as a shorthand, a social convention, a lingua franca; **anything more sophisticated would be a worse coordinating mechanism.** 
+I believe Elo scores in chess culture play a role similar to that of Black-Scholes in finance. Nobody treats the model as gospel anymore, yet it laid the foundation for options trading as a large, legitimate industry with many participants. Its primary utility is as a shorthand, a social convention, a lingua franca; **anything more sophisticated would be a worse coordinating mechanism.** 
 
 For a large number of people to adopt a system, and to mutually employ its outputs to interact with each other, it must be as simple as possible. Had the logistic regression model not been burned into my brain, I would find it far less intuitive than the original Elo formulation, and at any rate impossible to calculate.
 
