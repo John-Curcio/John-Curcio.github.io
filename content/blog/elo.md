@@ -63,10 +63,10 @@ Ignoring draws, this is the gradient of the binary cross-entropy loss, with $\al
 
 # Is this really more intuitive?
 
-It's easy to criticise the Elo rating system. For instance, suppose you compete in a tournament, and you lose your first match against a similarly-ranked opponent. For your own ego's sake, you should hope that guy does well in the rest of the tournament - if he also beats everyone else, you can tell yourself that his original elo was an underestimate.
+Criticisms of the Elo rating system cost a dime a dozen. For instance, suppose you compete in a tournament, and you lose your first match against a similarly-ranked opponent. For your own ego's sake, you should hope that guy does well in the rest of the tournament - if he also beats everyone else, you can believe that his original elo was an underestimate.
 
-I believe the function of Elo scores in chess culture is similar to that of Black-Scholes in finance. Nobody takes the model as gospel; it's useful as a shorthand and social convention. Traders can compute its Greeks in their heads and can expect other traders to understand it as well. The model was so useful that its adoption led to a boom in options trading. **Anything more sophisticated would be a worse coordinating mechanism.** 
+I believe Elo scores in chess culture play a role similar to that of Black-Scholes in finance. Nobody treats the model as gospel anymore, yet it laid the foundation for options trading as a large, legitimate industry with buyers and sellers. Its primary utility is as a shorthand, a social convention, a lingua franca; **anything more sophisticated would be a worse coordinating mechanism.** 
 
-If you want a large number of people to adopt a system, and to mutually employ its inferences to interact with each other, it must be as simple as possible. Had the logistic regression model not been burned into my brain, I would find it far less intuitive than the original Elo formulation, and at any rate impossible to calculate.
+For a large number of people to adopt a system, and to mutually employ its outputs to interact with each other, it must be as simple as possible. Had the logistic regression model not been burned into my brain, I would find it far less intuitive than the original Elo formulation, and at any rate impossible to calculate.
 
-It adds a new dimension to my understanding of the otherwise almost trite saying: all models are wrong, some are useful.
+It adds a new dimension to my understanding of the otherwise almost trite saying: all models are wrong, but some are useful.
