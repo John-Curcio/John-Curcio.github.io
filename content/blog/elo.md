@@ -14,13 +14,13 @@ tags = []
 
 # Elo Scoring
 
-Two players have elo scores $A$ and $B$.
+Two players have Elo scores $A$ and $B$.
 
 With no info other than that, it's generally accepted that
 
 $P(A\ beats\ B) = 1 / (1 + 10^{(B - A) / 400})$
 
-If A indeed does beat B, here are the new elo scores:
+If A indeed does beat B, here are the new Elo scores:
 
 * $A' = A + K \cdot (1 - P(A\ beats\ B))$
 
@@ -36,7 +36,7 @@ If A and B go to a draw, this is the update rule:
 
 So $A$ and $B$ are pulled towards one another.
 
-[Chess.com gives new players an elo of 400 to start](https://support.chess.com/article/671-how-do-i-create-an-accoun#:~:text=Choose%20your%20skill,Advanced%3A%201600).
+[Chess.com gives new players an Elo of 400 to start](https://support.chess.com/article/671-how-do-i-create-an-accoun#:~:text=Choose%20your%20skill,Advanced%3A%201600).
 
 # Statistical Intuition
 
@@ -49,21 +49,21 @@ Turns out, with some algebraic manipulations, one can show that the following is
 * Let $X_A$ be a one-hot encoding of the chess player $A$
 * Let $Y$ be $1$ if A beat B, $0.5$ if they draw, and $0$ if B beat A
 
-$P(A\ beats\ B) = 1 / (1 + e^{-\beta (X_A - X_B)})$
+$P(A\ beats\ B) = 1 / (1 + e^{-\beta^T (X_A - X_B)})$
 
-That looks familiar, right? It's logistic regression without an intercept term. To show these are equivalent, set $A = \frac{400}{\ln 10} \beta X_A$.
+That looks familiar, right? It's logistic regression without an intercept term. To show these are equivalent, set $A = \frac{400}{\ln 10} \beta^T X_A$.
 
 And then, for the update rule:
 
-$ \beta' = \beta + \alpha (Y - P(A\ beats\ B))$
+$ \beta' = \beta + \alpha (Y - P(A\ beats\ B))^T (X_A - X_B)$
 
-Ignoring draws, this is the gradient of the binary cross-entropy loss, with $\alpha$ for the learning rate.
+Ignoring draws, this is the gradient of the binary cross-entropy loss, with the learning rate $\alpha$ equivalent to a scaled K-factor.
 
-**So the Elo rating system is stochastic gradient descent on a really, really wide logistic regression model, with a batch size of 1**. The K-factor is a scaled learning rate.
+**So the Elo rating system is stochastic gradient descent on a really, really wide logistic regression model, with a batch size of 1**. Every player gets a coefficient, which is their Elo score.
 
 # Is this really more intuitive?
 
-Criticisms of the Elo rating system cost a dime a dozen. For instance, suppose you compete in a tournament, and you lose your first match against a similarly-ranked opponent. For your own ego's sake, you should hope that guy does well in the rest of the tournament - if he also beats everyone else, you can believe that his original elo was an underestimate.
+Criticisms of the Elo rating system cost a dime a dozen. For instance, suppose you compete in a tournament, and you lose your first match against a similarly-ranked opponent. For your own ego's sake, you should hope that guy does well in the rest of the tournament - if he also beats everyone else, you can believe that his original Elo was an underestimate.
 
 I believe Elo scores in chess culture play a role similar to that of Black-Scholes in finance. Nobody treats the model as gospel anymore, yet it laid the foundation for options trading as a large, legitimate industry with many participants. Its primary utility is as a shorthand, a social convention, a lingua franca; **anything more sophisticated would be a worse coordinating mechanism.** 
 
