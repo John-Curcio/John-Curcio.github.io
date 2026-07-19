@@ -1,6 +1,6 @@
 baseURL = "https://xtxinversexty.com/"
 locale = "en-us"
-title = "curcio's curios"
+title = "XTXinverseXTY | John Curcio"
 theme = "PaperMod"
 
 # Generate a nice robots.txt for SEO
@@ -49,7 +49,7 @@ enableRobotsTXT = true
   disableSpecial1stPost = true
 
   [params.homeInfoParams]
-    Title = "John Curcio"
+    Title = "John Curcio / XTXinverseXTY"
     Content = """
 I'm John Curcio, and this is my blog. I go by XTXinverseXTY on most platforms. I like weird little math problems and real data.
 
