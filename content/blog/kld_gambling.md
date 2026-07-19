@@ -1,12 +1,12 @@
 +++
 title = "KL Divergence and the Kelly Criterion"
-date = "2026-09-18T02:09:23-04:00"
+date = "2026-07-18T02:09:23-04:00"
 draft = true
 math = true
 #
 # description is optional
 #
-# description = "Kullback-Liebler Divergence, Kullback-Leibler-Divergence, KL Divergence, Kelly Criterion"
+# description = "Kullback-Leibler-Divergence, KL Divergence, Kelly Criterion"
 
 
 tags = []
@@ -16,13 +16,13 @@ tags = []
 
 Suppose the Knicks play the Spurs tomorrow. 
 
-A bookmaker believes $P(\text{Knicks win}) = p$. He sells a \$1 contract that pays:
-* $\frac{1}{p}$ if the Knicks win
-* $\frac{1}{1-p}$ if the Spurs win
+A bookmaker believes $P(\text{Knicks win}) = p$. He sells two contracts, each priced at \$1:
+* One that pays $\frac{1}{p}$ if the Knicks win
+* One that pays $\frac{1}{1-p}$ if the Spurs win
 
 *(Note: Zero vig $\implies$ fair value = \$1)*
 
-A gambler believes $P(\text{Knicks win}) = q \neq p$. He’s broke but bold, aiming to [maximize his rate of return](https://en.wikipedia.org/wiki/Kelly_criterion). So with his last \$1 to his name, he bets:
+A gambler believes $P(\text{Knicks win}) = q > p$. He’s broke but bold, aiming to [maximize his rate of return](https://en.wikipedia.org/wiki/Kelly_criterion). So with his last \$1 to his name, he bets:
 * \$q on the Knicks
 * $\$(1-q)$ on the Spurs
 
@@ -30,7 +30,7 @@ This is equivalent to wagering $a = \frac{q-p}{1-p}$ on the Knicks and leaving t
 
 As the game is about to start, the gambler is feeling good. His expected log-wealth is:
 
-$$E[\log(W)] = q \log\left(\frac{q}{p}\right) + (1-q) \log\left(\frac{1-q}{1-p}\right)$$
+$$E_q[\log(W)] = q \log\left(\frac{q}{p}\right) + (1-q) \log\left(\frac{1-q}{1-p}\right)$$
 
 ---
 
@@ -39,8 +39,8 @@ If you’ve taken a course in statistics or machine learning, you will recognize
 
 ### Interpretation
 * **The Kelly Criterion:** The $q, 1-q$ split is algebraically the same as staking $f^* = \frac{q-p}{1-p}$ on the Knicks per the Kelly criterion.
-* **Expected Return:** The bet’s expected log‑return is the Kullback-Leibler divergence between the gambler’s beliefs and the market’s beliefs.
-* **Actual Payoff:** After the game, his actual payoff equals the likelihood ratio ($\frac{q}{p}$ or $\frac{1-q}{1-p}$).
+* **Expected Log-Return:** The bet’s expected log‑return is the Kullback-Leibler divergence between the gambler’s beliefs and the market’s beliefs.
+* **Actual Payoff:** After the game, his actual wealth-multiplier equals the likelihood ratio ($\frac{q}{p}$ or $\frac{1-q}{1-p}$).
 
 ---
 
