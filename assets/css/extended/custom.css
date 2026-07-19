@@ -1,0 +1,37 @@
+:root {
+  --main-width: 760px;
+  --nav-width: 960px;
+  --radius: 6px;
+}
+
+.post-title,
+.page-header h1 {
+  font-size: 34px;
+  line-height: 1.18;
+}
+
+.post-content {
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.post-content h2,
+.post-content h3 {
+  margin-top: 1.8em;
+}
+
+.post-content img {
+  display: block;
+  margin: 1.5rem auto;
+}
+
+.post-content mjx-container[jax="CHTML"][display="true"] {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}
+
+.home-info .entry-content {
+  font-size: 17px;
+  line-height: 1.65;
+}

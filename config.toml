@@ -1,11 +1,81 @@
-baseURL = 'http://john-curcio.github.io/'
-languageCode = 'en-us'
+baseURL = "https://john-curcio.github.io/"
+locale = "en-us"
 title = "curcio's curios"
-theme = 'hugo-bearblog'
+theme = "PaperMod"
 
 # Generate a nice robots.txt for SEO
 enableRobotsTXT = true
 
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
 [permalinks]
   blog = "/:slug/"
-  tags = "/blog/:slug"
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[pagination]
+  pagerSize = 10
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [["\\[", "\\]"], ["$$", "$$"]]
+          inline = [["\\(", "\\)"], ["$", "$"]]
+
+[params]
+  env = "production"
+  description = "Short notes on ML, AI, math, and whatever else seems worth caching."
+  author = "John Curcio"
+  keywords = ["machine learning", "AI", "math", "notes"]
+  mainSections = ["blog"]
+  math = true
+  defaultTheme = "auto"
+  disableThemeToggle = false
+  ShowReadingTime = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = false
+  ShowCodeCopyButtons = true
+  ShowRssButtonInSectionTermList = true
+  disableSpecial1stPost = true
+
+  [params.homeInfoParams]
+    Title = "John Curcio"
+    Content = """
+I'm John Curcio, and this is my blog. I like weird little math problems and real data.
+
+I'm always writing an essay or hacking on some bizarre side project, and every now and then I share what I'm working on.
+"""
+
+[[menu.main]]
+  identifier = "archives"
+  name = "Archive"
+  url = "/archives/"
+  weight = 10
+
+[[menu.main]]
+  identifier = "tags"
+  name = "Tags"
+  url = "/tags/"
+  weight = 20
+
+[[menu.main]]
+  identifier = "search"
+  name = "Search"
+  url = "/search/"
+  weight = 30
+
+[[menu.main]]
+  identifier = "contact"
+  name = "Contact"
+  url = "/contact/"
+  weight = 40
