@@ -1,7 +1,7 @@
 +++
 title = "KL Divergence and the Kelly Criterion"
 date = "2026-07-18T02:09:23-04:00"
-draft = true
+draft = false
 math = true
 #
 # description is optional
