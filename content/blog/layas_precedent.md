@@ -55,7 +55,7 @@ The author [described](https://www.reddit.com/r/LocalLLaMA/comments/1kl0uvv) it 
 
 From a distance, I thought the role of PPO here was to have a reward model estimate conversion likelihood given state, and train the agent to recommend actions/salesspeak which maximize estimated conversion likelihood (this has a litany of problems and would probably break, but I can appreciate the concept).
 
-It seems to be:
+In fact, it seems to be:
 
 - An MLP over OpenAI text embeddings (plus conversation_metrics, which included the target)
 - A synthetic dataset of sales conversations (I can’t say which generator revision produced it)
@@ -80,7 +80,7 @@ where $q_t$ is a stored annotation from the synthetic dataset, plus a [penalty](
                 reward -= 1.0 * (predicted_prob - 0.5)
 ```
 
-I want to believe that these probabilities were used to generate the synthetic dataset in the first place, but I can’t say for sure. And from [peeking at commit history](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/commit/36fa6dcf75a438d4727ca370157474211e818743), that seems to be false, though I can’t take this as authoritative (`generate_dataset.py` was deleted and never put back).
+If $q_t$ is a latent probability used to generate the synthetic data, then regressing on it is at least a coherent supervised target. But from [peeking at commit history](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/commit/36fa6dcf75a438d4727ca370157474211e818743), that seems to be false, though I can’t take this as authoritative (`generate_dataset.py` was deleted and never put back).
 
 I don’t see any evidence that the agent learns a policy to causally affect sales conversion in the environment, under partial information (recall the leakage). In the training environment, the policy outputs a prediction, but doesn’t sample a sales intervention whose consequences are then simulated or observed.
 
@@ -110,7 +110,7 @@ From [his post](https://laya.convaiinnovations.com/), emphasis mine:
 > My earlier model used ***PPO over sequence representations to output turn-by-turn conversion trajectories*** (probabilities from 0.0 to 1.0) in vertical sales conversations. Jev generalized parallel sampling using what they called RLCD (Reinforcement Learning for Calibrated Decisions) to output confidence distributions and schema choices horizontally, charging $0.042 per million input tokens with typical response times around 150 ms.
 > 
 
-The main point of comparison here appears to be the concept of making decisions based on a non-autoregressive model, using RL.
+The main point of comparison here appears to be the concept of making decisions based on a non-autoregressive model, using RL. Obviously this predates all projects.
 
 | Point of comparison | SalesRLAgent | Jev |
 | --- | --- | --- |
