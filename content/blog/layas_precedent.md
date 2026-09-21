@@ -109,7 +109,7 @@ From [his post](https://laya.convaiinnovations.com/), emphasis mine:
 > My earlier model used ***PPO over sequence representations to output turn-by-turn conversion trajectories*** (probabilities from 0.0 to 1.0) in vertical sales conversations. Jev generalized parallel sampling using what they called RLCD (Reinforcement Learning for Calibrated Decisions) to output confidence distributions and schema choices horizontally, charging $0.042 per million input tokens with typical response times around 150 ms.
 > 
 
-The main point of comparison here appears to be the concept of making decisions based on a non-autoregressive model, using RL. Obviously this predates all projects.
+The main point of comparison here appears to be the concept of making decisions based on a non-autoregressive model, using RL. Obviously this predates both; If SalesRLAgent's application of PPO can be credibly descibed as RL, then this trivially describes every classifier.
 
 | Point of comparison | SalesRLAgent | Jev |
 | --- | --- | --- |
