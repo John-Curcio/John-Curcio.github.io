@@ -2,9 +2,11 @@
 &lt;p&gt;Brief context:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://typesafe.ai/"&gt;Jev&lt;/a&gt; came out recently, offering API access to a foundation model that is 1) strong and 2) extremely convenient to integrate into applications&lt;/li&gt;
-&lt;li&gt;An author published his own Laya model, claiming that his prior art (SalesRLAgent) went &lt;a href="https://laya.convaiinnovations.com/"&gt;unjustly uncredited&lt;/a&gt;. His post has since &lt;a href="https://news.ycombinator.com/item?id=49765348"&gt;circulated&lt;/a&gt; broadly&lt;/li&gt;
+&lt;li&gt;An author published his own Laya model, claiming that his prior art (SalesRLAgent) went &lt;a href="https://laya.convaiinnovations.com/"&gt;unjustly uncredited&lt;/a&gt;. His post has since &lt;a href="https://news.ycombinator.com/item?id=49765348"&gt;circulated&lt;/a&gt; &lt;a href="https://x.com/JFPuget/status/2101667766692384980?s=20"&gt;broadly&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;I dug into SalesRLAgent over the weekend. I found serious errors and virtually zero commonality with Jev, and little reason to take it seriously.&lt;/p&gt;</description></item><item><title>KL Divergence and the Kelly Criterion</title><link>https://xtxinversexty.com/kl-divergence-and-the-kelly-criterion/</link><pubDate>Sat, 18 Jul 2026 02:09:23 -0400</pubDate><guid>https://xtxinversexty.com/kl-divergence-and-the-kelly-criterion/</guid><description>&lt;h1 id="portfolio-splitting-and-the-kelly-criterion"&gt;Portfolio Splitting and the Kelly Criterion&lt;/h1&gt;
+&lt;p&gt;I dug into SalesRLAgent over the weekend. I found serious errors and virtually zero commonality with Jev.&lt;/p&gt;
+&lt;h1 id="egregious-data-leakage"&gt;Egregious Data Leakage&lt;/h1&gt;
+&lt;p&gt;SalesRLAgent’s &lt;code&gt;train.py&lt;/code&gt; has the eventual conversion &lt;code&gt;outcome&lt;/code&gt; as a model input. You can trace it &lt;a href="https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/main/train.py#L226"&gt;here&lt;/a&gt;:&lt;/p&gt;</description></item><item><title>KL Divergence and the Kelly Criterion</title><link>https://xtxinversexty.com/kl-divergence-and-the-kelly-criterion/</link><pubDate>Sat, 18 Jul 2026 02:09:23 -0400</pubDate><guid>https://xtxinversexty.com/kl-divergence-and-the-kelly-criterion/</guid><description>&lt;h1 id="portfolio-splitting-and-the-kelly-criterion"&gt;Portfolio Splitting and the Kelly Criterion&lt;/h1&gt;
 &lt;p&gt;Suppose the Knicks play the Spurs tomorrow.&lt;/p&gt;
 &lt;p&gt;A bookmaker believes $P(\text{Knicks win}) = p$. He sells two fractional contracts, each fairly priced under that belief:&lt;/p&gt;
 &lt;ul&gt;
