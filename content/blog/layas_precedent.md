@@ -9,9 +9,9 @@ draft = false
 Brief context:
 
 - [Jev](https://typesafe.ai/) came out recently, offering API access to a foundation model that is 1) strong and 2) extremely convenient to integrate into applications
-- An author published his own Laya model, claiming that his prior art (SalesRLAgent) went [unjustly uncredited](https://laya.convaiinnovations.com/). His post has since [circulated](https://news.ycombinator.com/item?id=49765348) broadly
+- An author published his own Laya model, claiming that his prior art (SalesRLAgent) went [unjustly uncredited](https://laya.convaiinnovations.com/). His post has since [circulated](https://news.ycombinator.com/item?id=49765348) [broadly](https://x.com/JFPuget/status/2101667766692384980?s=20)
 
-I dug into SalesRLAgent over the weekend. I found serious errors and virtually zero commonality with Jev, and little reason to take it seriously.
+I dug into SalesRLAgent over the weekend. I found serious errors and virtually zero commonality with Jev.
 
 # Egregious Data Leakage
 
