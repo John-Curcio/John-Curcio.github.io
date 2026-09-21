@@ -54,7 +54,7 @@ where $q_t$ is a stored annotation from the synthetic dataset, plus a [penalty](
                 reward -= 1.0 * (predicted_prob - 0.5)
 ```
 
-If $q_t$ is a latent probability used to generate the synthetic data, then regressing on it is at least a coherent supervised target. But from [peeking at commit history](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/commit/36fa6dcf75a438d4727ca370157474211e818743), that seems to be false, though I can’t take this as authoritative (`generate_dataset.py` was deleted and never put back).
+If $q_t$ is a latent probability used to generate the synthetic data, then regressing on it is at least a coherent supervised target. But from [peeking at commit history](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/commit/36fa6dcf75a438d4727ca370157474211e818743), that's not the case, though I can’t take this as authoritative (`generate_dataset.py` was deleted and never put back; maybe he fixed it and never told anybody!).
 
 I don’t see any evidence that the agent learns a policy to causally affect sales conversion in the environment, under partial information (recall the leakage). In the training environment, the policy outputs a prediction, but doesn’t sample a sales intervention whose consequences are then simulated or observed.
 
