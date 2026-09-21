@@ -113,7 +113,6 @@ The main point of comparison here appears to be the concept of making decisions 
 | Point of comparison | SalesRLAgent | Jev |
 | --- | --- | --- |
 | Support for variable developer schemas | None whatsoever; SalesRLAgent supported predictions for a single binary outcome (poorly) | Arguably its primary selling point |
-| Generality | None whatsoever | Zero-shot performance well beyond sales conversion conversations |
 | RL for calibration | SalesRLAgent’s application of PPO seemed confused and unnecessary, let alone novel | Unknown what RLCD is precisely |
 | Quality | Given the leakage, on a synthetic dataset no less, almost certainly not very good | Untested for sales conversion |
 | Model architecture | Linear layer over `text-embedding-3-large` | Not public |
