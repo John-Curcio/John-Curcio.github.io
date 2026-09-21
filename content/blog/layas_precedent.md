@@ -12,7 +12,7 @@ Brief context:
 
 I dug into SalesRLAgent over the weekend. I found serious errors and virtually zero commonality with Jev.
 
-# Egregious Data Leakage In Multiple Places
+# Egregious Data Leakage
 
 SalesRLAgent’s `train.py` has the eventual conversion `outcome` as a model input. You can trace it [here](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/main/train.py#L226).
 
