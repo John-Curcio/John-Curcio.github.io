@@ -62,13 +62,9 @@ The author claims that "the guiding brain in my system was always reinforcement 
 
 # Jev
 
-Jev is a generally-capable model with a strict, yet generic interface. I can’t verify much of this because it’s not open-source, but there aren’t that many ways to skin a cat, so I’ll throw in my speculation anyway:
+Jev is a generally-capable model with a strict, yet generic interface. It guarantees type-safety by restricting the support of the output distribution, and apparently post-trained with an RL objective that rewards calibration. It may not be calibrated w.r.t. **your** data but that's another discussion.
 
-- Souped-up bidirectional encoder with (I assume) commensurate pre-training
-- Post-trained with an RL objective that rewards calibration (unknown precisely what)
-- Inference engine guarantees type-safety by restricting the support of the output distribution
-
-It may not be calibrated w.r.t. ***your*** data, but that’s another discussion.
+We can't verify the specific objective or architecture, as it's not open-source.
 
 # Shaky Comparison to Jev
 
@@ -84,14 +80,13 @@ From [his post](https://laya.convaiinnovations.com/), emphasis mine:
 > My earlier model used ***PPO over sequence representations to output turn-by-turn conversion trajectories*** (probabilities from 0.0 to 1.0) in vertical sales conversations. Jev generalized parallel sampling using what they called RLCD (Reinforcement Learning for Calibrated Decisions) to output confidence distributions and schema choices horizontally, charging $0.042 per million input tokens with typical response times around 150 ms.
 > 
 
-The main point of comparison here appears to be the concept of making decisions based on a non-autoregressive model, using RL. Obviously this predates both; If SalesRLAgent's application of PPO can be credibly descibed as RL, then this trivially describes every classifier.
+The main point of comparison here appears to be the concept of making decisions based on a non-autoregressive model, using RL. Obviously this predates both; If SalesRLAgent's application of PPO can be credibly descibed as RL, then this trivially describes every fine-tuned probabilistic classifier.
 
 | Point of comparison | SalesRLAgent | Jev |
 | --- | --- | --- |
 | Support for variable developer schemas | None whatsoever; SalesRLAgent supported predictions for a single binary outcome (poorly) | Arguably its primary selling point |
 | RL for calibration | SalesRLAgent’s application of PPO seemed confused, unnecessary, hardly novel | Unknown what RLCD is precisely |
-| Quality | Given the leakage, on a synthetic dataset no less, almost certainly not very good | Untested for sales conversion |
-| Model architecture | Linear layer over `text-embedding-3-large` | Not public |
+| Model architecture | MLP over `text-embedding-3-large` | Not public |
 | Inference cost | No hosted API, reliant on OpenAI text embeddings | $0.042 per million input tokens with typical response times around 150 ms |
 
 Open releases make scrutiny possible, which is one reason they are valuable. But the released SalesRLAgent implementation has serious flaws and, unless the author has nonpublic information about Jev’s training and architecture, little demonstrably in common.
