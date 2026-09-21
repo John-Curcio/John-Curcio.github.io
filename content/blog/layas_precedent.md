@@ -11,7 +11,7 @@ Brief context:
 - [Jev](https://typesafe.ai/) came out recently, offering API access to a foundation model that is 1) strong and 2) extremely convenient to integrate into applications
 - An author published his own Laya model, claiming that his prior art (SalesRLAgent) went [unjustly uncredited](https://laya.convaiinnovations.com/). His post has since [circulated](https://news.ycombinator.com/item?id=49765348) broadly
 
-I dug into SalesRLAgent over the weekend. I found serious errors and little commonality with Jev.
+I dug into SalesRLAgent over the weekend. I found serious errors and virtually zero commonality with Jev, and little reason to take it seriously.
 
 # Egregious Data Leakage
 
@@ -112,7 +112,8 @@ The main point of comparison here appears to be the concept of making decisions 
 
 | Point of comparison | SalesRLAgent | Jev |
 | --- | --- | --- |
-| Support for variable developer schemas | None whatsoever | Arguably its primary selling point |
+| Support for variable developer schemas | None whatsoever; SalesRLAgent supported predictions for a single binary outcome (poorly) | Arguably its primary selling point |
+| Generality | None whatsoever | Zero-shot performance well beyond sales conversion conversations |
 | RL for calibration | SalesRLAgent’s application of PPO seemed confused and unnecessary, let alone novel | Unknown what RLCD is precisely |
 | Quality | Given the leakage, on a synthetic dataset no less, almost certainly not very good | Untested for sales conversion |
 | Model architecture | Linear layer over `text-embedding-3-large` | Not public |
