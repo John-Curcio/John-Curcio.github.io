@@ -1,5 +1,5 @@
 +++
-title = "Laya's Precedent is Bad"
+title = "Laya's Precedent is Embarrassingly Bad, Calling This Jev Prior Art is Absurd"
 date = "2026-09-21T01:51:44-04:00"
 draft = false
 +++
