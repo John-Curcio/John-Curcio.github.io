@@ -46,7 +46,7 @@ SalesRLAgent’s `train.py` has the eventual conversion `outcome` as a model inp
 
 The information flow is: `outcome` → `metrics` → `ConversationState.conversation_metrics` → `state_vector` → policy input.
 
-# What Is SalesRLAgent, Anyway?
+# Bizarre Application of PPO
 
 The author [described](https://www.reddit.com/r/LocalLLaMA/comments/1kl0uvv) it as:
 
@@ -83,6 +83,8 @@ where $q_t$ is a stored annotation from the synthetic dataset, plus a [penalty](
 I want to believe that these probabilities were used to generate the synthetic dataset in the first place, but I can’t say for sure. And from [peeking at commit history](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/commit/36fa6dcf75a438d4727ca370157474211e818743), that seems to be false, though I can’t take this as authoritative (`generate_dataset.py` was deleted and never put back).
 
 I don’t see any evidence that the agent learns a policy to causally affect sales conversion in the environment, under partial information (recall the leakage). In the training environment, the policy outputs a prediction, but doesn’t sample a sales intervention whose consequences are then simulated or observed.
+
+The author claims that "the guiding brain in my system was always reinforcement learning," but it's unclear how PPO is actually helpful here.
 
 # Jev
 
