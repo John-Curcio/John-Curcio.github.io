@@ -12,38 +12,13 @@ Brief context:
 
 I dug into SalesRLAgent over the weekend. I found serious errors and virtually zero commonality with Jev.
 
-# Egregious Data Leakage
+# Egregious Data Leakage In Multiple Places
 
-SalesRLAgent’s `train.py` has the eventual conversion `outcome` as a model input. You can trace it [here](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/main/train.py#L226):
+SalesRLAgent’s `train.py` has the eventual conversion `outcome` as a model input. You can trace it [here](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/main/train.py#L226).
 
-```python
-        # Parse metrics
-        metrics = {
-            ...
-            'outcome': float(row.get('outcome', 0.5)),
-        }
-...
-						messages, metrics, probability_trajectory = self._parse_conversation(self.current_conversation_idx)
-...
-            metrics = self.conversation_state.conversation_metrics.copy()
-...
-            self.conversation_state = ConversationState(
-                conversation_history=history,
-                embedding=embedding,
-                conversation_metrics=metrics,
-                turn_number=self.current_turn,
-                conversion_probabilities=conv_probs
-            )
-...
-        return np.concatenate([
-            self.embedding,
-            metric_values,
-            turn_info,
-            padded_probs
-        ])
-```
+The information flow is: [`row['outcome']`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L170) → [`metrics`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L166-L172) → [`ConversationState.conversation_metrics`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L235-L241) → [`metric_values`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L63) → [`state_vector`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L71-L76) → [observation returned by `reset`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L243). Each `step` [copies `self.conversation_state.conversation_metrics` forward](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L272) into the [next state](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L282-L288), so `outcome` is in [every single observation](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L290) of the episode.
 
-The information flow is: `outcome` → `metrics` → `ConversationState.conversation_metrics` → `state_vector` → policy input.
+There are many others but I think you get the idea. It's all really bad.
 
 # Bizarre Application of PPO
 
@@ -114,7 +89,7 @@ The main point of comparison here appears to be the concept of making decisions 
 | Point of comparison | SalesRLAgent | Jev |
 | --- | --- | --- |
 | Support for variable developer schemas | None whatsoever; SalesRLAgent supported predictions for a single binary outcome (poorly) | Arguably its primary selling point |
-| RL for calibration | SalesRLAgent’s application of PPO seemed confused and unnecessary, let alone novel | Unknown what RLCD is precisely |
+| RL for calibration | SalesRLAgent’s application of PPO seemed confused, unnecessary, hardly novel | Unknown what RLCD is precisely |
 | Quality | Given the leakage, on a synthetic dataset no less, almost certainly not very good | Untested for sales conversion |
 | Model architecture | Linear layer over `text-embedding-3-large` | Not public |
 | Inference cost | No hosted API, reliant on OpenAI text embeddings | $0.042 per million input tokens with typical response times around 150 ms |
