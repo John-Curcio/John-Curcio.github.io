@@ -4,12 +4,11 @@ date = "2026-09-21T01:51:44-04:00"
 draft = false
 +++
 
-# Laya’s Precedent is Bad
-
 Brief context:
 
-- [Jev](https://typesafe.ai/) came out recently, offering API access to a foundation model that is 1) strong and 2) extremely convenient to integrate into applications
-- An author published his own Laya model, claiming that his prior art (SalesRLAgent) went [unjustly uncredited](https://laya.convaiinnovations.com/). His post has since [circulated](https://news.ycombinator.com/item?id=49765348) [broadly](https://x.com/JFPuget/status/2101667766692384980?s=20)
+- [Jev](https://typesafe.ai/) came out recently, offering API access to a closed, API-only model that answers typed decision questions (developer-specified schemas) in a single pass, with probabilities post-trained for calibration.
+- SalesRLAgent ([arXiv](https://arxiv.org/abs/2503.23303), [HF repo](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning)) is an earlier model by Nandakishor Mukkunnoth that predicts sales-conversion probability from sales conversations.
+- Laya is an open-weights, Jev-compatible alternative, also by Mukkunnoth. In its launch post, Mukkunnoth claims SalesRLAgent was prior art for Jev and went [unjustly uncredited](https://laya.convaiinnovations.com/). His claim has since [circulated](https://news.ycombinator.com/item?id=49765348) [broadly](https://x.com/JFPuget/status/2101667766692384980?s=20).
 
 I dug into SalesRLAgent over the weekend. I found serious errors and virtually zero commonality with Jev.
 
