@@ -14,9 +14,7 @@ I dug into SalesRLAgent over the weekend. I found serious errors and virtually z
 
 # Egregious Data Leakage
 
-SalesRLAgent’s `train.py` has the eventual conversion `outcome` as a model input. You can trace it [here](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/main/train.py#L226).
-
-The information flow is: [`row['outcome']`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L170) → [`metrics`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L166-L172) → [`ConversationState.conversation_metrics`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L235-L241) → [`metric_values`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L63) → [`state_vector`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L71-L76) → [observation returned by `reset`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L243). Each `step` [copies `self.conversation_state.conversation_metrics` forward](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L272) into the [next state](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L282-L288), so `outcome` is in [every single observation](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L290) of the episode.
+SalesRLAgent’s `train.py` has the eventual conversion `outcome` as a model input. The information flow is: [`row['outcome']`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L170) → [`metrics`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L166-L172) → [`ConversationState.conversation_metrics`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L235-L241) → [`metric_values`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L63) → [`state_vector`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L71-L76) → [observation returned by `reset`](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L243). Each `step` [copies `self.conversation_state.conversation_metrics` forward](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L272) into the [next state](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L282-L288), so `outcome` is in [every single observation](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L290) of the episode.
 
 There are many others but I think you get the idea. It's all really bad.
 
@@ -27,13 +25,11 @@ The author [described](https://www.reddit.com/r/LocalLLaMA/comments/1kl0uvv) it 
 > a chess game kinda system for predicting sales conversion probabilities from sales conversations… Then I just trained an RL with PPO, by reducing the dimension using a linear layer and using that to do the final prediction with PPO.
 > 
 
-From a distance, I thought the role of PPO here was to have a reward model estimate conversion likelihood given state, and train the agent to recommend actions/salesspeak which maximize estimated conversion likelihood (this has a litany of problems and would probably break, but I can appreciate the concept).
-
-In fact, it seems to be:
+SalesRLAgent seems to be:
 
 - An MLP over OpenAI text embeddings (plus conversation_metrics, which included the target)
 - A synthetic dataset of sales conversations (I can’t say which generator revision produced it)
-- RL via PPO (seems unnecessary, boils down to supervised probability regression)
+- RL via PPO? 
 
 The model is [rewarded](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/blob/fa341daeefc0fe2843e2df839ab52dd78cab1dc0/train.py#L250-L254) based on:
 
@@ -54,11 +50,11 @@ where $q_t$ is a stored annotation from the synthetic dataset, plus a [penalty](
                 reward -= 1.0 * (predicted_prob - 0.5)
 ```
 
-If $q_t$ is a latent probability used to generate the synthetic data, then regressing on it is at least a coherent supervised target. But from [peeking at commit history](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/commit/36fa6dcf75a438d4727ca370157474211e818743), that's not the case, though I can’t take this as authoritative (`generate_dataset.py` was deleted and never put back; maybe he fixed it and never told anybody!).
+If $q_t$ is a latent probability used to generate the synthetic data, then regressing on it is at least a coherent supervised target. From [peeking at commit history](https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning/commit/36fa6dcf75a438d4727ca370157474211e818743), that may not the case, though I can’t take this as authoritative (`generate_dataset.py` was deleted and never put back; maybe he fixed it and never told anybody!).
 
-I don’t see any evidence that the agent learns a policy to causally affect sales conversion in the environment, under partial information (recall the leakage). In the training environment, the policy outputs a prediction, but doesn’t sample a sales intervention whose consequences are then simulated or observed.
+Anyway, the agent never learns to intervene in its environment, it's just doing regression. In the training environment, the policy outputs a prediction, but doesn’t sample a sales intervention whose consequences are then simulated or observed.
 
-The author claims that "the guiding brain in my system was always reinforcement learning," but it's unclear how PPO is actually helpful here.
+The author claims that "the guiding brain in my system was always reinforcement learning," but **it's unclear why PPO is even here**.
 
 # Jev
 
@@ -89,6 +85,6 @@ The main point of comparison here appears to be the concept of making decisions 
 | Model architecture | MLP over `text-embedding-3-large` | Not public |
 | Inference cost | No hosted API, reliant on OpenAI text embeddings | $0.042 per million input tokens with typical response times around 150 ms |
 
-Open releases make scrutiny possible, which is one reason they are valuable. But the released SalesRLAgent implementation has serious flaws and, unless the author has nonpublic information about Jev’s training and architecture, little demonstrably in common.
+Open releases make scrutiny possible, which is one reason they are valuable. But the released SalesRLAgent implementation has disappointing flaws and, unless the author has nonpublic information about Jev’s training and architecture, nothing in common.
 
-The longer it takes for us to identify unsupported claims, the less credence we can give to legitimate open-source work, and the more we must defer to shallow reputation signals and closed-source solutions.
+The longer it takes for us to identify unsupported claims, the less credence we can give to legitimate open-source work, and the more we must defer to shallow reputation signals and closed-source solutions. Hence my post.
